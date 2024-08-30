@@ -14,6 +14,13 @@ class controlar:
         pass
     
     def iniciar():
+        eleccion.E = ""
         eleccion.arranque()
+        if eleccion.E == "iniciar":
+            vistadeinicio.inicio()
+        elif eleccion.E == "registrarse":
+            pass
+        else:
+            pass
         
 controlar.iniciar()
