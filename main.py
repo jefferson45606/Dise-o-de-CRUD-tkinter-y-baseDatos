@@ -8,6 +8,7 @@ from vistaInforme import *
 from VistaInicioSesion import *
 from VistarRegistroproductos import *
 from vista_arranque import *
+from vista_registro import *
 
 class controlar:
     def __init__(self):
@@ -19,7 +20,7 @@ class controlar:
         if eleccion.E == "iniciar":
             vistadeinicio.inicio()
         elif eleccion.E == "registrarse":
-            pass
+            registro.inicio()
         else:
             pass
         
