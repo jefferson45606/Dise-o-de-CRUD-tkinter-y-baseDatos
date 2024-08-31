@@ -34,7 +34,18 @@ class registro():
         registro.cedula_Entry = tk.Entry(registro.frame)
         registro.cedula_Entry.grid(column=0,row=9)
         
-        registro.inicio_botton = tk.Button(registro.frame, text="registrarse" , bg="skyblue")
-        registro.inicio_botton.grid(row=10, column=0, padx=10, pady=10)
+        registro.registrar_botton = tk.Button(registro.frame, text="registrar" , bg="skyblue" , command=registro.comprobacion_de_registro)
+        registro.registrar_botton.grid(row=10, column=0, padx=10, pady=10)
         
         registro.root.mainloop()
+        
+    def comprobacion_de_registro():
+        registro.root.destroy()
+        registro.comprobar = "si"
+        
+        
+        
+    def obtencion():
+        usuario = registro.usuario_Entry.get()
+        contraseña = registro.contraseña_Entry.get()
+        

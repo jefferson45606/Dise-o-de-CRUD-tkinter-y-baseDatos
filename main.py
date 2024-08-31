@@ -1,27 +1,28 @@
-from controladorInforme import *
-from modeloBaseDatos import *
-from modeloInforme import *
-from modeloproductos import *
-from modeloUsuario import *
-#from VistaCatalogo import *
-from vistaInforme import *
-from VistaInicioSesion import *
-from VistarRegistroproductos import *
-from vista_arranque import *
-from vista_registro import *
+from vista.arranque.vista_arranque import *
+from vista.arranque.vista_registro import *
+from vista.arranque.VistaInicioSesion import *
 
-class controlar:
-    def __init__(self):
-        pass
-    
+class controlar:    
     def iniciar():
-        eleccion.E = ""
-        eleccion.arranque()
-        if eleccion.E == "iniciar":
-            vistadeinicio.inicio()
-        elif eleccion.E == "registrarse":
-            registro.inicio()
-        else:
-            pass
+        registro.comprobar = ""
+        eleccion.E = "eleccion"
+        while True:
+            if eleccion.E == "iniciar":
+                eleccion.E = None
+                vistadeinicio.inicio()
+            elif eleccion.E == "registrarse":
+                registro.inicio()
+                if registro.comprobar == "si":
+                    eleccion.E = "eleccion"
+                else:
+                    eleccion.E = None
+            elif eleccion.E == "eleccion":
+                eleccion.E = None
+                eleccion.arranque()
+            else:
+                break
+        
+    def enviar():
+        vistadeinicio.inicio()
         
 controlar.iniciar()
