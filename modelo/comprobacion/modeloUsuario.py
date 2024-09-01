@@ -1,4 +1,7 @@
 class Usuario:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+    def comprobar(datos):
+        Usuario.usuario = datos[0]
+        Usuario.contraseña = datos[1]
+        Usuario.Nombre = datos[2]
+        Usuario.Apellido = datos[3]
+        Usuario.Cedula = datos[4]
