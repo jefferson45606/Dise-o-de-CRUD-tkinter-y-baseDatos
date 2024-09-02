@@ -1,5 +1,4 @@
 from modelo.comprobacion.modeloUsuario import *
-from guardados.usuarios import *
 
 class guardado:
     def comprobacion(datos):
@@ -15,4 +14,5 @@ class guardado:
     
 #------------------linea privada---------------------------------------------
 def comparacion(usuario,contraseña):
-    
+    with open("guardados/usuarios.txt","r") as comprobar:
+        pass
