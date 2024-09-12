@@ -1,18 +1,30 @@
 from modelo.comprobacion.modeloUsuario import *
+import json
 
 class guardado:
-    def comprobacion(datos):
-        Usuario.usuario
-        Usuario.contraseña
-        Usuario.Nombre
-        Usuario.Apellido
-        Usuario.Cedula
+    def comprobacion(usuario,contraseña):
         try:
-            resultado = comparacion(Usuario.usuario,Usuario.contraseña)
+            resultado = comparacion(usuario,contraseña)
         except:
-            pass
+            print("error no pasa del try")
+            resultado = comparacion(usuario,contraseña)
     
 #------------------linea privada---------------------------------------------
 def comparacion(usuario,contraseña):
     with open("guardados/usuarios.txt","r") as comprobar:
-        pass
+        com=comprobar.readline()
+        try:
+            comprobador = json.loads(com)
+            if usuario in comprobador:
+                if contraseña in comprobador[usuario]:
+                    print(comprobador[usuario])
+                    resultado = comprobador[usuario]
+                    print(resultado[contraseña])
+                    print("terminado")
+            else:
+                print("perfecto")
+        except:
+            print("no c imprimio nada")
+            print(com)
+            print(com["b"])
+            

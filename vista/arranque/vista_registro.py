@@ -40,12 +40,12 @@ class registro():
         registro.root.mainloop()
         
     def comprobacion_de_registro():
+        registro.usuario = registro.usuario_Entry.get()
+        registro.contraseña = registro.contraseña_Entry.get()
         registro.root.destroy()
         registro.comprobar = "si"
         
         
         
     def obtencion():
-        usuario = registro.usuario_Entry.get()
-        contraseña = registro.contraseña_Entry.get()
-        
+        return registro.usuario,registro.contraseña
