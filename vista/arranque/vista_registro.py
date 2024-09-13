@@ -1,3 +1,4 @@
+from vista.mensajes.mensajes_de_alerta import *
 import tkinter as tk
 
 class registro():
@@ -42,10 +43,16 @@ class registro():
     def comprobacion_de_registro():
         registro.usuario = registro.usuario_Entry.get()
         registro.contraseña = registro.contraseña_Entry.get()
-        registro.root.destroy()
-        registro.comprobar = "si"
+        registro.nombre = registro.nombre_Entry.get()
+        registro.apellido = registro.apellido_Entry.get()
+        registro.cedula = registro.cedula_Entry.get()
+        if registro.usuario == "" or registro.contraseña=="" or registro.nombre=="" or registro.apellido=="" or registro.cedula=="":
+            errores_en_registro.en_blanco()
+        else:
+            registro.root.destroy()
+            registro.comprobar = "si"
         
         
         
     def obtencion():
-        return registro.usuario,registro.contraseña
+        return registro.usuario,registro.contraseña,registro.nombre,registro.apellido,registro.cedula

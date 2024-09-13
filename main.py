@@ -24,8 +24,13 @@ class controlar:
             elif eleccion.E == "comprobar":
                 eleccion.E = None
                 registro.comprobar = None
-                usuario,contraseña=registro.obtencion()
-                guardado.comprobacion(usuario,contraseña)
+                usuario,contraseña,nombre,apellido,cedula=registro.obtencion()
+                guardado.comprobacion_registro(usuario,contraseña,nombre,apellido,cedula)
+                if guardado.resultado == "registro":
+                    eleccion.E = "registrarse"
+                    guardado.resultado = None
+                else:
+                    eleccion.E = "iniciar"
             else:
                 break
         
