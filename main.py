@@ -1,19 +1,15 @@
-from controladorInforme import *
-from modeloBaseDatos import *
-from modeloInforme import *
-from modeloproductos import *
-from modeloUsuario import *
-#from VistaCatalogo import *
-from vistaInforme import *
-from VistaInicioSesion import *
-from VistarRegistroproductos import *
-from vista_arranque import *
+import tkinter as tk
+from controlador import Controlador
+from vista_inicio import VistaInicioSesion
 
-class controlar:
-    def __init__(self):
-        pass
-    
-    def iniciar():
-        eleccion.arranque()
-        
-controlar.iniciar()
+# Crear la ventana principal
+root = tk.Tk()
+
+# Crear el controlador
+controlador = Controlador()
+
+# Crear la vista del inicio de sesión y pasarle el controlador
+vista_inicio = VistaInicioSesion(root, controlador)
+
+# Ejecutar la aplicación
+root.mainloop()
