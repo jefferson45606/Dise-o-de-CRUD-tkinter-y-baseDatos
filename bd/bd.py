@@ -6,7 +6,7 @@ from mysql.connector import Error
 def conectar_db():
     try:
         conn = mysql.connector.connect(
-            host='127.0.0.1',
+            host='localhost',
             user='anderson',       
             password='12345', 
             database='catalogo_avenas'          
@@ -21,7 +21,7 @@ def conectar_db():
 def crear_tablas(cursor):
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS usuario (
-            ID_usuario BIGINT PRIMARY KEY AUTO_INCREMENT,
+            ID_usuario BIGINT PRIMARY KEY,
             Usuario VARCHAR(255) NOT NULL,
             Contraseña VARCHAR(255) NOT NULL,
             Rol VARCHAR(255) NOT NULL
@@ -40,8 +40,8 @@ def crear_tablas(cursor):
     ''')
     print("Tabla 'producto' creada o ya existe.")
 
-def agregar_usuario(cursor, username, password, rol):
-    cursor.execute('INSERT INTO usuario (Usuario, Contraseña, Rol) VALUES (%s, %s, %s)', (username, password, rol))
+def agregar_usuario(cursor, cedula, username, password, rol):
+    cursor.execute('INSERT INTO usuario (ID_usuario, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s)', (cedula, username, password, rol))
 
 def verificar_usuario(username, password):
     conn = conectar_db()
@@ -56,19 +56,22 @@ def verificar_usuario(username, password):
 
 # Funciones de la interfaz
 def registrar_usuario_gui():
+    cedula = entry_usuario_cedula.get()
     username = entry_usuario_nombre.get()
     password = entry_usuario_password.get()
     rol = entry_usuario_rol.get()
-    if username and password and rol:
+    if cedula and username and password and rol:
         conn = conectar_db()
         if conn:
             cursor = conn.cursor()
             try:
-                agregar_usuario(cursor, username, password, rol)
+                agregar_usuario(cursor, cedula, username, password, rol)
                 conn.commit()
                 messagebox.showinfo("Éxito", "Usuario registrado.")
+                entry_usuario_cedula.delete(0, tk.END)
                 entry_usuario_nombre.delete(0, tk.END)
                 entry_usuario_password.delete(0, tk.END)
+                entry_usuario_rol.delete(0, tk.END)
             except mysql.connector.Error as e:
                 messagebox.showerror("Error", f"Error al registrar usuario: {e}")
             finally:
@@ -157,11 +160,9 @@ def consultar_avenas(cursor):
         cursor.close()
         conn.close()
 
-# Configuración de la interfaz de registro e inicio de sesión
 ventana_inicio = tk.Tk()
 ventana_inicio.title("Registro e Inicio de Sesión")
 
-# Crear las tablas si no existen
 conn = conectar_db()
 if conn:
     cursor = conn.cursor()
@@ -169,29 +170,34 @@ if conn:
     cursor.close()
     conn.close()
 
-# Sección de Registro de Usuarios
+# codigo de registro de usuario
 frame_usuario = tk.Frame(ventana_inicio)
 frame_usuario.pack(pady=10)
 
+label_usuario_cedula = tk.Label(frame_usuario, text="Cedula:")
+label_usuario_cedula.grid(row=0, column=0)
+entry_usuario_cedula = tk.Entry(frame_usuario)
+entry_usuario_cedula.grid(row=0, column=1)
+
 label_usuario_nombre = tk.Label(frame_usuario, text="Nombre de Usuario:")
-label_usuario_nombre.grid(row=0, column=0)
+label_usuario_nombre.grid(row=1, column=0)
 entry_usuario_nombre = tk.Entry(frame_usuario)
-entry_usuario_nombre.grid(row=0, column=1)
+entry_usuario_nombre.grid(row=1, column=1)
 
 label_usuario_password = tk.Label(frame_usuario, text="Contraseña:")
-label_usuario_password.grid(row=1, column=0)
+label_usuario_password.grid(row=2, column=0)
 entry_usuario_password = tk.Entry(frame_usuario, show='*')
-entry_usuario_password.grid(row=1, column=1)
+entry_usuario_password.grid(row=2, column=1)
 
 label_usuario_rol = tk.Label(frame_usuario, text="Rol:")
-label_usuario_rol.grid(row=2, column=0)
+label_usuario_rol.grid(row=3, column=0)
 entry_usuario_rol = tk.Entry(frame_usuario)
-entry_usuario_rol.grid(row=2, column=1)
+entry_usuario_rol.grid(row=3, column=1)
 
 button_registrar_usuario = tk.Button(frame_usuario, text="Registrar Usuario", command=registrar_usuario_gui)
-button_registrar_usuario.grid(row=3, columnspan=2)
+button_registrar_usuario.grid(row=4, columnspan=2)
 
-# Sección de Inicio de Sesión
+#codigo de inicio de secion
 frame_inicio_sesion = tk.Frame(ventana_inicio)
 frame_inicio_sesion.pack(pady=10)
 
