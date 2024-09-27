@@ -6,7 +6,7 @@ from mysql.connector import Error
 def conectar_db():
     try:
         conn = mysql.connector.connect(
-            host='localhost',
+            host='127.0.0.1',
             user='anderson',       
             password='12345', 
             database='catalogo_avenas'          
