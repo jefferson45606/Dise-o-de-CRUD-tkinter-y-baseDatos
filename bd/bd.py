@@ -31,7 +31,7 @@ def crear_tablas(cursor):
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS producto (
-            ID_producto BIGINT AUTO_INCREMENT PRIMARY KEY,
+            ID_producto BIGINT PRIMARY KEY,
             Nombre VARCHAR(255) NOT NULL,
             Descripcion VARCHAR(255) NOT NULL,
             Precio BIGINT NOT NULL,
@@ -106,42 +106,43 @@ def mostrar_ventana_principal(username):
         frame_avenas = tk.Frame(ventana_principal)
         frame_avenas.pack(pady=10)
 
+        label_avena_codigo = tk.Label(frame_avenas, text="Código del producto:")
+        label_avena_codigo.grid(row=0, column=0)
+        entry_avena_codigo = tk.Entry(frame_avenas)
+        entry_avena_codigo.grid(row=0, column=1)
+        
         label_avena_nombre = tk.Label(frame_avenas, text="Nombre del producto:")
-        label_avena_nombre.grid(row=0, column=0)
-
+        label_avena_nombre.grid(row=1, column=0)
         entry_avena_nombre = tk.Entry(frame_avenas)
-        entry_avena_nombre.grid(row=0, column=1)
+        entry_avena_nombre.grid(row=1, column=1)
 
         label_avena_descripcion = tk.Label(frame_avenas, text="Descripción del producto:")
-        label_avena_descripcion.grid(row=1, column=0)
-
+        label_avena_descripcion.grid(row=2, column=0)
         entry_avena_descripcion = tk.Entry(frame_avenas)
-        entry_avena_descripcion.grid(row=1, column=1)
+        entry_avena_descripcion.grid(row=2, column=1)
 
         label_avena_precio = tk.Label(frame_avenas, text="Precio del producto:")
-        label_avena_precio.grid(row=2, column=0)
-
+        label_avena_precio.grid(row=3, column=0)
         entry_avena_precio = tk.Entry(frame_avenas)
-        entry_avena_precio.grid(row=2, column=1)
+        entry_avena_precio.grid(row=3, column=1)
 
-        label_avena_stock = tk.Label(frame_avenas, text="Cantidad en stock:")
-        label_avena_stock.grid(row=3, column=0)
-
+        label_avena_stock = tk.Label(frame_avenas, text="Cantidad disponible:")
+        label_avena_stock.grid(row=4, column=0)
         entry_avena_stock = tk.Entry(frame_avenas)
-        entry_avena_stock.grid(row=3, column=1)
+        entry_avena_stock.grid(row=4, column=1)
 
-        button_agregar_avena = tk.Button(frame_avenas, text="Agregar avena", command=lambda: agregar_avena(cursor, entry_avena_nombre.get(), entry_avena_descripcion.get(), entry_avena_precio.get(), entry_avena_stock.get()))
-        button_agregar_avena.grid(row=4, columnspan=2)
+        button_agregar_avena = tk.Button(frame_avenas, text="Agregar avena", command=lambda: agregar_avena(cursor, entry_avena_codigo.get(), entry_avena_nombre.get(), entry_avena_descripcion.get(), entry_avena_precio.get(), entry_avena_stock.get()))
+        button_agregar_avena.grid(row=5, columnspan=2)
         
         button_consultar_avenas = tk.Button(ventana_principal, text="Consultar Avenas", command=lambda: consultar_avenas(cursor))
-        button_consultar_avenas.pack(pady=5)
+        button_consultar_avenas.pack(pady=6)
 
-def agregar_avena(cursor, nombre, descripcion, precio, stock):
-    if nombre and descripcion and precio and stock:
+def agregar_avena(cursor, codigo, nombre, descripcion, precio, stock):
+    if codigo and nombre and descripcion and precio and stock:
         conn = conectar_db()
         if conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO producto (Nombre, Descripcion, Precio, Cantidad_Stock) VALUES (%s, %s, %s, %s)', (nombre, descripcion, precio, stock))
+            cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_Stock) VALUES (%s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock))
             conn.commit()
             messagebox.showinfo("Éxito", f"Avena '{nombre}' agregada.")
             cursor.close()
