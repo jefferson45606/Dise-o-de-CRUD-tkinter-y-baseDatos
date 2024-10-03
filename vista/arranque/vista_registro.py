@@ -25,7 +25,7 @@ class registro():
         registro.nombre_Entry = tk.Entry(registro.frame)
         registro.nombre_Entry.grid(column=0,row=5)
 
-        registro.apellido_label = tk.Label(registro.frame, text="Apellido")
+        registro.apellido_label = tk.Label(registro.frame, text="rol")
         registro.apellido_label.grid(column=0,row=6)
         registro.apellido_Entry = tk.Entry(registro.frame)
         registro.apellido_Entry.grid(column=0,row=7)

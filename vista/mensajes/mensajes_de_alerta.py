@@ -6,3 +6,10 @@ class errores_en_registro:
         
     def en_blanco():
         messagebox.showerror("Error", "debe de llenar todas las casillas")
+        
+    def no_informacion():
+        messagebox.showerror("Error", "No se encontro informacion")
+        
+class exito_en_registro():
+        def usuario_registrado():
+            messagebox.showinfo("Éxito", "Usuario registrado.")
