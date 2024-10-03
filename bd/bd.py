@@ -150,6 +150,12 @@ def agregar_avena(cursor, codigo, nombre, descripcion, precio, stock):
     else:
         messagebox.showwarning("Advertencia", "Por favor, completa todos los campos.")
         
+def registrar_avena_gui():
+    codigo = entry_avena_codigo.get()
+    nombre = entry_avena_nombre.get()
+    descripcion = entry_avena_descripcion.get()
+    
+    
 def consultar_avenas(cursor):
     conn = conectar_db()
     if conn:
