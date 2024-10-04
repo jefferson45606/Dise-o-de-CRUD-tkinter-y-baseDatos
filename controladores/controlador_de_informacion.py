@@ -4,7 +4,14 @@ from bd.data_base import *
 
 class guardado:
     def comprobacion_registro(usuario,contraseña,nombre,rol,cedula):
-        resultado=b_d.registrar_usuario_gui(cedula,nombre,contraseña,rol)
+        conn = data_base_base.conectar_db()
+        if conn:
+            cursor = conn.cursor()
+            data_base_base.crear_tablas(cursor)
+            cursor.close()
+            conn.close()
+        data_base_base.conectar_db()
+        resultado=data_base_base.agregar_usuario(cursor,cedula,usuario,contraseña,rol)
         if resultado == "usuario registrado":
             exito_en_registro.usuario_registrado()
         elif resultado == "ya registrado":

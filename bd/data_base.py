@@ -2,28 +2,23 @@ import mysql.connector
 from mysql.connector import Error
 from tkinter import messagebox
 
-class Controlador:
-    def __init__(self):
-        self.conexion = self.conectar_db()
-
-    def conectar_db(self):
+class data_base_base:
+    def conectar_db():
         try:
-            conn = mysql.connector.connect(
+            data_base_base.conn = mysql.connector.connect(
                 host='localhost',
                 user='anderson',
                 password='12345',
                 database='catalogo_avenas'
             )
-            if conn.is_connected():
+            if data_base_base.conn.is_connected():
                 print("Conexión exitosa a la base de datos.")
-                return conn
         except Error as e:
             print(f"Error al conectar a la base de datos: {e}")
-            return None
 
-    def crear_tablas(self):
-        cursor = self.conexion.cursor()
-        cursor.execute('''
+    def crear_tablas():
+        data_base_base.cursor = data_base_base.conexion.cursor()
+        data_base_base.cursor.execute('''
             CREATE TABLE IF NOT EXISTS usuario (
                 ID_usuario BIGINT PRIMARY KEY AUTO_INCREMENT,
                 Usuario VARCHAR(255) NOT NULL,
@@ -31,7 +26,7 @@ class Controlador:
                 Rol VARCHAR(255) NOT NULL
             );
         ''')
-        cursor.execute('''
+        data_base_base.cursor.execute('''
             CREATE TABLE IF NOT EXISTS producto (
                 ID_producto BIGINT AUTO_INCREMENT PRIMARY KEY,
                 Nombre VARCHAR(255) NOT NULL,
@@ -40,31 +35,42 @@ class Controlador:
                 Cantidad_Stock BIGINT NOT NULL
             );
         ''')
-        self.conexion.commit()
-        cursor.close()
+        data_base_base.conexion.commit()
+        data_base_base.cursor.close()
 
-    def agregar_usuario(self, cedula, username, password, rol):
-        cursor = self.conexion.cursor()
-        cursor.execute('INSERT INTO usuario (Cedual, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s)', (cedula, username, password, rol))
-        self.conexion.commit()
-        cursor.close()
+    def agregar_usuario(cursor,cedula, username, password, rol):
+        try:
+            print("1")
+            data_base_base.cursor = data_base_base.conexion.cursor()
+            try:
+                print("2")
+                data_base_base.cursor.execute('INSERT INTO usuario (Cedual, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s)', (cedula, username, password, rol))
+                resultado = "registro"
+            except:
+                resultado = "ya registrado"
+            print("3")
+            data_base_base.conexion.commit()
+            print("4")
+            data_base_base.cursor.close()
+            return resultado
+        except:
+            return ""
 
-    def verificar_usuario(self, username, password):
-        cursor = self.conexion.cursor()
-        cursor.execute('SELECT * FROM usuario WHERE Usuario = %s AND Contraseña = %s', (username, password))
-        user = cursor.fetchone()
-        cursor.close()
-        return user is not None
+    def verificar_usuario(username, password):
+        data_base_base.cursor = data_base_base.conexion.cursor()
+        data_base_base.cursor.execute('SELECT * FROM usuario WHERE Usuario = %s AND Contraseña = %s', (username, password))
+        data_base_base.user = data_base_base.cursor.fetchone()
+        data_base_base.cursor.close()
 
-    def agregar_producto(self, nombre, descripcion, precio, stock):
-        cursor = self.conexion.cursor()
+    def agregar_producto(nombre, descripcion, precio, stock):
+        cursor = data_base_base.conexion.cursor()
         cursor.execute('INSERT INTO producto (Nombre, Descripcion, Precio, Cantidad_Stock) VALUES (%s, %s, %s, %s)', (nombre, descripcion, precio, stock))
-        self.conexion.commit()
+        data_base_base.conexion.commit()
         cursor.close()
 
-    def consultar_productos(self):
-        cursor = self.conexion.cursor()
-        cursor.execute('SELECT * FROM producto')
-        productos = cursor.fetchall()
-        cursor.close()
+    def consultar_productos():
+        data_base_base.cursor = data_base_base.conexion.cursor()
+        data_base_base.cursor.execute('SELECT * FROM producto')
+        productos = data_base_base.cursor.fetchall()
+        data_base_base.cursor.close()
         return productos
