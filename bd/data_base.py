@@ -10,7 +10,7 @@ class Controlador:
         try:
             conn = mysql.connector.connect(
                 host='localhost',
-                user='jefferson',
+                user='anderson',
                 password='12345',
                 database='catalogo_avenas'
             )
