@@ -1,5 +1,5 @@
-from tkinter import *
-import tkinter as tk
+import tkinter as tk   
+from tkinter import messagebox
 
 class eleccion():
     def arranque():
@@ -22,3 +22,4 @@ class eleccion():
     def registrarse():
         eleccion.E = "registrarse"
         eleccion.root.destroy()
+        
