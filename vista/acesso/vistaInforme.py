@@ -6,4 +6,3 @@ class vistainforme(tk.Frame):
         self.controller = controller
         self.titulo = tk.Label(self, text="Informe de Productos")
         self.titulo.pack()
-        # Aquí se agregan widgets para mostrar informes.
