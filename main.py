@@ -3,6 +3,7 @@ from vista.arranque.vista_registro import *
 from vista.arranque.VistaInicioSesion import *
 from modelo.comprobacion.modeloUsuario import *
 from controladores.controlador_de_informacion import *
+from vista.acesso.catalogo import *
 
 class controlar:    
     def iniciar():
@@ -10,12 +11,25 @@ class controlar:
         eleccion.E = "eleccion"
         while True:
             if eleccion.E == "iniciar":
-                eleccion.E = None
                 vistadeinicio.inicio()
+                if vistadeinicio.comprobar == "si":
+                    guardado.verificacion_inicio(vistadeinicio.usuario,vistadeinicio.contraseña)
+                    if guardado.resultado=="exito":
+                        eleccion.E = "catalogo"
+                        guardado.resultado=""
+                    elif guardado.resultado =="error":
+                        eleccion.E = "iniciar"
+                        guardado.resultado=""
+                elif vistadeinicio.comprobar == "no":
+                    eleccion.E = "eleccion"
+                else:
+                    eleccion.E = None
             elif eleccion.E == "registrarse":
                 registro.inicio()
                 if registro.comprobar == "si":
                     eleccion.E = "comprobar"
+                elif registro.comprobar == "no":
+                    eleccion.E = "eleccion"
                 else:
                     eleccion.E = None
             elif eleccion.E == "eleccion":
@@ -31,6 +45,8 @@ class controlar:
                     guardado.resultado = None
                 else:
                     eleccion.E = "iniciar"
+            elif eleccion.E == "catalogo":
+                inicio.iniciar()
             else:
                 break
         

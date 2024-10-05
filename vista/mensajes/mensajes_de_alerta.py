@@ -13,3 +13,10 @@ class errores_en_registro:
 class exito_en_registro():
         def usuario_registrado():
             messagebox.showinfo("Éxito", "Usuario registrado.")
+            
+class inicio_de_sesion_me:
+    def inicio_exito():
+        messagebox.showinfo("Exito", "se a iniciado sesion correctamente")
+        
+    def inicio_error():
+        messagebox.showinfo("Error", "Usuario o contraseña incorrectos")
