@@ -42,7 +42,8 @@ class ProductsFrame(tk.Frame):
         product_description = tk.StringVar()
         product_image_path = tk.StringVar()
         product_price = tk.DoubleVar(value=0.0)
-        codigo = tk.StringVar()
+        codigo = tk.DoubleVar(value=0.0)
+        ventas = tk.DoubleVar(value=0.0)
 
         # Función para cargar imagen
         def upload_image():
@@ -63,6 +64,9 @@ class ProductsFrame(tk.Frame):
         
         tk.Label(register_window, text="codigo:").pack(pady=5)
         tk.Entry(register_window, textvariable=codigo).pack(pady=5)
+        
+        tk.Label(register_window, text="cantidad de ventas:").pack(pady=5)
+        tk.Entry(register_window, textvariable=ventas).pack(pady=5)
 
         tk.Button(register_window, text="Cargar Imagen", command=upload_image).pack(pady=5)
         image_label = tk.Label(register_window, text="No se ha seleccionado ninguna imagen")
@@ -75,12 +79,18 @@ class ProductsFrame(tk.Frame):
             inicio.price = product_price.get()
             inicio.image_path = product_image_path.get()
             inicio.codigo = codigo.get()
+            inicio.ventas = ventas.get()
 
             if inicio.codigo and inicio.name and inicio.description and inicio.image_path and inicio.price >= 0:
                 inicio.confirmar = "si"
+                messagebox.showinfo("Éxito", "Producto registrado con éxito.")
+                register_window.destroy()
+                inicio.root.destroy()
             else:
                 messagebox.showwarning("Datos Incompletos", "Por favor complete todos los campos y asegúrese de que el precio no sea negativo.")
                 inicio.confirmar = "no"
+                register_window.destroy()
+                inicio.root.destroy()
 
         tk.Button(register_window, text="Registrar Producto", command=register_product).pack(pady=10)
 
@@ -92,41 +102,34 @@ class ProductsFrame(tk.Frame):
 
         # Mostrar cada producto en la grilla
         for index, product in enumerate(inicio.registered_products):
-            img = Image.open(product["image_path"])
-            img.thumbnail((100, 100))
-            img = ImageTk.PhotoImage(img)
 
             product_frame = tk.Frame(self.products_frame, bd=1, relief="solid")
             product_frame.grid(row=index // 4, column=index % 4, padx=10, pady=10)
 
-            img_label = tk.Label(product_frame, image=img)
-            img_label.image = img
-            img_label.pack()
-
-            tk.Label(product_frame, text=product["name"], font=("Arial", 10, "bold")).pack(pady=2)
-            tk.Label(product_frame, text=product["description"], font=("Arial", 8)).pack(pady=2)
-            tk.Label(product_frame, text=f"Precio: ${product['price']:.2f}", font=("Arial", 8)).pack(pady=2)
+            tk.Label(product_frame, text=product["Nombre"], font=("Arial", 10, "bold")).pack(pady=2)
+            tk.Label(product_frame, text=product["Descripcion"], font=("Arial", 8)).pack(pady=2)
+            tk.Label(product_frame, text=(f"Precio: ${product['Precio']:.2f}"), font=("Arial", 8)).pack(pady=2)
 
     # Funciones para ordenar el catálogo
     def sort_by_price_desc(self):
         global registered_products
-        inicio.registered_products.sort(key=lambda x: x["price"], reverse=True)
-        self.update_catalog()
+        inicio.registered_products.sort(key=lambda x: x["Precio"], reverse=True)
+        ProductsFrame.update_catalog()
 
     def sort_by_price_asc(self):
         global registered_products
-        inicio.registered_products.sort(key=lambda x: x["price"])
-        self.update_catalog()
+        inicio.registered_products.sort(key=lambda x: x["Precio"])
+        ProductsFrame.update_catalog()
 
     def sort_by_name_asc(self):
         global registered_products
-        inicio.registered_products.sort(key=lambda x: x["name"].lower())
-        self.update_catalog()
+        inicio.registered_products.sort(key=lambda x: x["Nombre"].lower())
+        ProductsFrame.update_catalog()
 
     def sort_by_name_desc(self):
         global registered_products
-        inicio.registered_products.sort(key=lambda x: x["name"].lower(), reverse=True)
-        self.update_catalog()
+        inicio.registered_products.sort(key=lambda x: x["Nombre"].lower(), reverse=True)
+        ProductsFrame.update_catalog()
 
     # Función para abrir la ventana de búsqueda
     def open_search_window(self):
@@ -147,12 +150,12 @@ class ProductsFrame(tk.Frame):
 
             try:
                 price = float(search_term)
-                results = [p for p in inicio.registered_products if p["price"] == price]
+                results = [p for p in inicio.registered_products if p["Precio"] == price]
             except ValueError:
-                results = [p for p in inicio.registered_products if search_term.lower() in p["name"].lower()]
+                results = [p for p in inicio.registered_products if search_term.lower() in p["Nombre"].lower()]
 
             if results:
-                result_msg = "\n".join([f"{product['name']} - ${product['price']:.2f}" for product in results])
+                result_msg = "\n".join([f"{product['Nombre']} - ${product['Precio']:.2f}" for product in results])
                 messagebox.showinfo("Resultados", f"Se encontraron {len(results)} productos:\n{result_msg}")
             else:
                 messagebox.showinfo("Sin Resultados", "No se encontraron productos.")
@@ -197,16 +200,16 @@ class AboutFrame(tk.Frame):
         self.least_sold_listbox.delete(0, "end")
 
         # Ordenar los productos por ventas (aquí las ventas son aleatorias)
-        sorted_products = sorted(inicio.registered_products, key=lambda x: x["price"], reverse=True)
+        sorted_products = sorted(inicio.registered_products, key=lambda x: x["Precio"], reverse=True)
 
         for product in sorted_products[:5]:  # Más vendidos
-            self.most_sold_listbox.insert("end", f"{product['name']} - ${product['price']:.2f}")
+            self.most_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
 
         for product in sorted_products[-5:]:  # Menos vendidos
-            self.least_sold_listbox.insert("end", f"{product['name']} - ${product['price']:.2f}")
+            self.least_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
             
             
-class inicio:
+class inicio():
 # Función para cambiar de ventana
     def show_frame(frame_name):
         frame = inicio.frames[frame_name]
@@ -214,21 +217,20 @@ class inicio:
 
     def iniciar():
         # Lista de productos registrados
-        inicio.registered_products = []
 
         # Crear la aplicación principal
-        root = tk.Tk()
-        root.title("Catálogo de Productos")
-        root.geometry("1200x800")
+        inicio.root = tk.Tk()
+        inicio.root.title("Catálogo de Productos")
+        inicio.root.geometry("1200x800")
 
         # Frame contenedor para las diferentes pantallas
-        container = tk.Frame(root)
+        container = tk.Frame(inicio.root)
         container.pack(expand=True, fill="both")
 
         
 
         # Frame base para el menú superior
-        top_menu_frame = tk.Frame(root, bd=1, relief="solid", height=50)
+        top_menu_frame = tk.Frame(inicio.root, bd=1, relief="solid", height=50)
         top_menu_frame.pack(side="top", fill="x")
 
         # Botones del menú superior
@@ -237,10 +239,15 @@ class inicio:
 
         # Crear las ventanas y agregarlas al diccionario de frames
         for F in (ProductsFrame, AboutFrame):
-            inicio.frame = F(container, root)
+            inicio.frame = F(container, inicio.root)
             inicio.frames[F.__name__] = inicio.frame
             inicio.frame.grid(row=0, column=0, sticky="nsew")
 
         # Mostrar la ventana inicial
         inicio.show_frame("ProductsFrame")
-        root.mainloop()
+        try:
+            ProductsFrame.update_catalog()
+            print("este codigo se ejecuta")
+        except:
+            print("este codigo no se ejecuta")
+        inicio.root.mainloop()

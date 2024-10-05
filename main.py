@@ -7,8 +7,10 @@ from vista.acesso.catalogo import *
 
 class controlar:    
     def iniciar():
+        inicio.registered_products = b_d.obtener_productos()
         registro.comprobar = ""
         eleccion.E = "eleccion"
+        inicio.frames = {}
         while True:
             if eleccion.E == "iniciar":
                 vistadeinicio.inicio()
@@ -47,6 +49,16 @@ class controlar:
                     eleccion.E = "iniciar"
             elif eleccion.E == "catalogo":
                 inicio.iniciar()
+                if inicio.confirmar == "si":
+                    inicio.registered_products = b_d.obtener_productos()
+                    print(inicio.registered_products)
+                    inicio.confirmar = None
+                    guardado.cargar_productos()
+                elif inicio.confirmar == "no":
+                    inicio.registered_products = b_d.obtener_productos()
+                    print(inicio.registered_products)
+                    eleccion.E = "catalogo"
+                    inicio.confirmar = None
             else:
                 break
         

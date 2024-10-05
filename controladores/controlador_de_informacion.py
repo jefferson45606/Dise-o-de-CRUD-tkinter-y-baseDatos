@@ -27,4 +27,4 @@ class guardado:
             guardado.resultado="error"
         
     def cargar_productos():
-        b_d.agregar_avena(inicio.codigo, inicio.name, inicio.description, inicio.price, inicio.image_path)
+        b_d.agregar_avena(inicio.codigo, inicio.name, inicio.description, inicio.price, inicio.ventas, inicio.image_path)

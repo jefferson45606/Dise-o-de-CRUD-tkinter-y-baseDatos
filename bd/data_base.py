@@ -3,12 +3,12 @@ from mysql.connector import Error
 from tkinter import messagebox
 class b_d():
     def verificar_usuario(username, password):
-        b_d.conn = b_d.conectar_db()
+        b_d.conectar_db()
         if b_d.conn:
-            b_d.cursor = b_d.conn.b_d.cursor()
-            b_d.cursor.execute('SELECT * FROM usuario WHERE ID_usuario = %s AND Contraseña = %s', (username, password))
-            user = b_d.cursor.fetchone()
-            b_d.cursor.close()
+            cursor = b_d.conn.cursor()
+            cursor.execute('SELECT * FROM usuario WHERE ID_usuario = %s AND Contraseña = %s', (username, password))
+            user = cursor.fetchone()
+            cursor.close()
             b_d.conn.close()
             return user is not None
         return False
@@ -34,16 +34,26 @@ class b_d():
             return "llena campos"
 
     #----------------------avenas-------------------------------------------
-    def agregar_avena(codigo, nombre, descripcion, precio, stock):
+    def agregar_avena(codigo, nombre, descripcion, precio, stock, imagen):
+        print(codigo, nombre, descripcion, precio, stock, imagen)
         if codigo and nombre and descripcion and precio and stock:
-            b_d.conn = b_d.conectar_db()
+            b_d.conectar_db()
             if b_d.conn:
-                b_d.cursor = b_d.conn.b_d.cursor()
-                b_d.cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_Stock) VALUES (%s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock))
+                b_d.cursor = b_d.conn.cursor()                                                                                                                                                          
+                b_d.cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_Stock, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock,imagen))
                 b_d.conn.commit()
                 b_d.cursor.close()
                 b_d.conn.close()
     #------------------conectar al server------------------------------------------------
+            
+    def obtener_productos():
+        b_d.conectar_db()
+        cursor = b_d.conn.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM producto')
+        productos=cursor.fetchall()
+        cursor.close()
+        b_d.conn.close()
+        return productos
             
     def conectar_db():
         try:
