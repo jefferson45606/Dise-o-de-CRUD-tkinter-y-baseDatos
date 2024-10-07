@@ -26,7 +26,7 @@ class ProductsFrame(tk.Frame):
         # Marco del catálogo de productos
         ProductsFrame.products_frame = tk.Frame(self)
         ProductsFrame.products_frame.pack(pady=10, fill="both")
-
+            
         # Botón para registrar un nuevo producto
         register_button = tk.Button(self, text="Registrar Producto", command=self.open_register_window)
         register_button.pack(pady=10)
@@ -87,6 +87,7 @@ class ProductsFrame(tk.Frame):
                 messagebox.showinfo("Éxito", "Producto registrado con éxito.")
                 register_window.destroy()
                 inicio.root.destroy()
+                
             else:
                 messagebox.showwarning("Datos Incompletos", "Por favor complete todos los campos y asegúrese de que el precio no sea negativo.")
                 inicio.confirmar = "no"
@@ -100,11 +101,11 @@ class ProductsFrame(tk.Frame):
         # Limpiar la grilla de productos actual
         for widget in ProductsFrame.products_frame.winfo_children():
             widget.destroy()
-
+        
         # Mostrar cada producto en la grilla
         for index, product in enumerate(inicio.registered_products):
             
-            img = Image.open(product["image"])
+            img = Image.open(product["imagen"])
             img.thumbnail((100, 100))
             img = ImageTk.PhotoImage(img)
             
@@ -219,6 +220,15 @@ class AboutFrame(tk.Frame):
             
             
 class inicio():
+    def __init__(self) -> None:
+        try:
+            ProductsFrame.update_catalog()
+            print("este codigo se ejecuta")
+        except:
+            print("este codigo no se ejecuta")
+    
+    
+    
 # Función para cambiar de ventana
     def show_frame(frame_name):
         frame = inicio.frames[frame_name]

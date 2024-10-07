@@ -48,6 +48,7 @@ class controlar:
                 else:
                     eleccion.E = "iniciar"
             elif eleccion.E == "catalogo":
+                inicio.registered_products = b_d.obtener_productos()
                 inicio.iniciar()
                 if inicio.confirmar == "si":
                     inicio.registered_products = b_d.obtener_productos()
