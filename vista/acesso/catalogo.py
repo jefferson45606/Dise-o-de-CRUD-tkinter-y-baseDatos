@@ -24,8 +24,8 @@ class ProductsFrame(tk.Frame):
         tk.Button(category_buttons_frame, text="Buscar", command=self.open_search_window).pack(side="left", padx=5)
 
         # Marco del catálogo de productos
-        self.products_frame = tk.Frame(self)
-        self.products_frame.pack(pady=10, fill="both")
+        ProductsFrame.products_frame = tk.Frame(self)
+        ProductsFrame.products_frame.pack(pady=10, fill="both")
 
         # Botón para registrar un nuevo producto
         register_button = tk.Button(self, text="Registrar Producto", command=self.open_register_window)
@@ -77,6 +77,7 @@ class ProductsFrame(tk.Frame):
             inicio.name = product_name.get()
             inicio.description = product_description.get()
             inicio.price = product_price.get()
+            
             inicio.image_path = product_image_path.get()
             inicio.codigo = codigo.get()
             inicio.ventas = ventas.get()
@@ -95,16 +96,24 @@ class ProductsFrame(tk.Frame):
         tk.Button(register_window, text="Registrar Producto", command=register_product).pack(pady=10)
 
     # Función para actualizar el catálogo con los productos registrados
-    def update_catalog(self):
+    def update_catalog():
         # Limpiar la grilla de productos actual
-        for widget in self.products_frame.winfo_children():
+        for widget in ProductsFrame.products_frame.winfo_children():
             widget.destroy()
 
         # Mostrar cada producto en la grilla
         for index, product in enumerate(inicio.registered_products):
-
-            product_frame = tk.Frame(self.products_frame, bd=1, relief="solid")
+            
+            img = Image.open(product["image"])
+            img.thumbnail((100, 100))
+            img = ImageTk.PhotoImage(img)
+            
+            product_frame = tk.Frame(ProductsFrame.products_frame, bd=1, relief="solid")
             product_frame.grid(row=index // 4, column=index % 4, padx=10, pady=10)
+            
+            img_label = tk.Label(product_frame, image=img)
+            img_label.image = img
+            img_label.pack()
 
             tk.Label(product_frame, text=product["Nombre"], font=("Arial", 10, "bold")).pack(pady=2)
             tk.Label(product_frame, text=product["Descripcion"], font=("Arial", 8)).pack(pady=2)

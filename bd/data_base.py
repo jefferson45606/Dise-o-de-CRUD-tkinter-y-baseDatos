@@ -39,10 +39,12 @@ class b_d():
         if codigo and nombre and descripcion and precio and stock:
             b_d.conectar_db()
             if b_d.conn:
-                b_d.cursor = b_d.conn.cursor()                                                                                                                                                          
-                b_d.cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_Stock, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock,imagen))
+                cursor = b_d.conn.cursor()
+                print("antes")                                                                                                                                         
+                cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_Stock, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock,imagen))
+                print("despues")
                 b_d.conn.commit()
-                b_d.cursor.close()
+                cursor.close()
                 b_d.conn.close()
     #------------------conectar al server------------------------------------------------
             
@@ -56,6 +58,10 @@ class b_d():
         return productos
             
     def conectar_db():
+        print("conectando")
+        print("conectando")
+        print("conectando")
+        print("conectando")
         try:
             b_d.conn = mysql.connector.connect(
                 host='localhost',
