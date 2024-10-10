@@ -59,9 +59,6 @@ class b_d():
             
     def conectar_db():
         print("conectando")
-        print("conectando")
-        print("conectando")
-        print("conectando")
         try:
             b_d.conn = mysql.connector.connect(
                 host='localhost',
@@ -73,14 +70,3 @@ class b_d():
                 print("Conexión exitosa a la base de datos 'catalogo_avenas'")
         except Error as e:
             print(f"Error al conectar a la base de datos: {e}")
-        
-    def operaciones(codigo,nombre,descripcion,precio):
-        if b_d.conn:
-            cursor = b_d.conn.cursor()
-            cursor.execute('INSERT INTO usuario (ID_usuario, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s)', (codigo, nombre, descripcion, precio))
-            b_d.conn.commit()
-            messagebox.showinfo("Éxito", f"Avena '{nombre}' agregada.")
-            cursor.close()
-            b_d.conn.close()
-        else:
-            messagebox.showwarning("Advertencia", "Por favor, completa todos los campos.")

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class vistadeinicio():
     def inicio():
@@ -34,7 +35,21 @@ class vistadeinicio():
         vistadeinicio.comprobar="no"
         
     def iniciar():
-        vistadeinicio.usuario =vistadeinicio.usuario_Entry.get()
-        vistadeinicio.contraseña =vistadeinicio.contraseña_Entry.get()
-        vistadeinicio.root.destroy()
-        vistadeinicio.comprobar="si"
+        try:
+            vistadeinicio.comprobar="si"
+            try:
+                vistadeinicio.usuario = int(vistadeinicio.usuario_Entry.get())
+            except:
+                if vistadeinicio.usuario == None:
+                    messagebox.showerror("Error", "debe de llenar todas las casillas")
+                else:
+                    messagebox.showerror("Error", "solo puede poner numeros")
+                vistadeinicio.comprobar="no"
+            vistadeinicio.contraseña =vistadeinicio.contraseña_Entry.get()
+            if vistadeinicio.contraseña == "":
+                messagebox.showerror("Error", "debe de llenar todas las casillas")
+                vistadeinicio.comprobar="no"
+            vistadeinicio.root.destroy()
+        except:
+            messagebox.showerror("Error", "debe de llenar todas las casillas")
+            vistadeinicio.comprobar="no"

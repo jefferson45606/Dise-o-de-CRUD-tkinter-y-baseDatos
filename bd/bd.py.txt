@@ -47,7 +47,7 @@ def verificar_usuario(username, password):
     conn = conectar_db()
     if conn:
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM usuario WHERE Usuario = %s AND Contraseña = %s', (username, password))
+        cursor.execute('SELECT * FROM usuario WHERE ID_usuario = %s AND Contraseña = %s', (username, password))
         user = cursor.fetchone()
         cursor.close()
         conn.close()
