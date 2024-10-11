@@ -211,9 +211,8 @@ class AboutFrame(tk.Frame):
     def generate_report(self):
         self.most_sold_listbox.delete(0, "end")
         self.least_sold_listbox.delete(0, "end")
-
         # Ordenar los productos por ventas (aquí las ventas son aleatorias)
-        sorted_products = sorted(inicio.registered_products, key=lambda x: x["Precio"], reverse=True)
+        sorted_products = sorted(inicio.registered_products, key=lambda x: x["Cantidad_Stock"], reverse=True)
 
         for product in sorted_products[:5]:  # Más vendidos
             self.most_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
