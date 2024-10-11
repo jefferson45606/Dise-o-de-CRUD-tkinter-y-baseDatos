@@ -1,3 +1,5 @@
+
+import json
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
@@ -10,13 +12,20 @@ class ProductsFrame(tk.Frame):
         super().__init__(parent)
         self.controller = controller
 
-        # Título de la sección
-        catalog_title = tk.Label(self, text="Catálogo de Productos", font=("Arial", 18))
-        catalog_title.pack(pady=10)
+        header_frame = tk.Frame(self)
+        header_frame.pack(fill="x", pady=5)
+
+        # Título de la sección (Catálogo de Productos) alineado a la izquierda
+        catalog_title = tk.Label(header_frame, text="Catálogo de Productos", font=("Arial", 18))
+        catalog_title.pack(side="left", padx=200)
+
+        # Título de la empresa alineado a la derecha
+        company_label = tk.Label(header_frame, text="Nombre de la Empresa", font=("Arial", 16, "bold"))
+        company_label.pack(side="right", padx=10)
 
         # Botones de categorías
         category_buttons_frame = tk.Frame(self)
-        category_buttons_frame.pack(pady=10)
+        category_buttons_frame.pack(pady=1)
 
         tk.Button(category_buttons_frame, text="Más Caro", command=self.sort_by_price_desc).pack(side="left", padx=5)
         tk.Button(category_buttons_frame, text="Más Barato", command=self.sort_by_price_asc).pack(side="left", padx=5)
@@ -30,7 +39,7 @@ class ProductsFrame(tk.Frame):
             
         # Botón para registrar un nuevo producto
         register_button = tk.Button(self, text="Registrar Producto", command=self.open_register_window)
-        register_button.pack(pady=10)
+        register_button.pack(pady=1)
 
     # Función para abrir la ventana de registro de productos
     def open_register_window(self):
@@ -220,6 +229,12 @@ class AboutFrame(tk.Frame):
         for product in sorted_products[-5:]:  # Menos vendidos
             self.least_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
             
+        imprimir = {"mas vendidos":sorted_products[5],"menos vendidos":sorted_products[-5]}
+        print(imprimir)
+        json_data = json.dumps(imprimir, indent=4)
+        with open("datos.txt", "w") as archivo:
+            archivo.write(json_data)
+            print("Archivo 'datos.txt' creado con éxito.")
             
 class inicio():
     def __init__(self) -> None:

@@ -1,0 +1,18 @@
+{
+    "mas vendidos": {
+        "ID_producto": 7,
+        "Nombre": "7",
+        "Descripcion": "7",
+        "Precio": 7,
+        "Cantidad_Stock": 7,
+        "imagen": "D:/Pictures/Naruto.jpg"
+    },
+    "menos vendidos": {
+        "ID_producto": 13,
+        "Nombre": "asd",
+        "Descripcion": "jsjs",
+        "Precio": 1233,
+        "Cantidad_Stock": 678,
+        "imagen": "D:/Pictures/desktop-1920x1080.jpg"
+    }
+}
