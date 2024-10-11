@@ -70,3 +70,21 @@ class b_d():
                 print("Conexión exitosa a la base de datos 'catalogo_avenas'")
         except Error as e:
             print(f"Error al conectar a la base de datos: {e}")
+            
+    def actualizar(codigo,nombre,descripcion,precio,venta,imagen):
+        b_d.conectar_db()
+        cursor = b_d.conn.cursor()
+        consulta = "UPDATE producto SET Nombre = %s, Descripcion = %s, Precio = %s, Cantidad_Stock = %s, imagen = %s WHERE ID_producto = %s"
+        cursor.execute(consulta, (nombre, descripcion, precio, venta, imagen, codigo))
+        b_d.conn.commit()
+        cursor.close()
+        b_d.conn.close()
+        
+    def eliminar(codigo):
+        b_d.conectar_db()
+        cursor = b_d.conn.cursor()
+        consulta = "DELETE FROM producto WHERE ID_producto = %s"
+        cursor.execute(consulta, (codigo,))
+        b_d.conn.commit()
+        cursor.close()
+        b_d.conn.close()

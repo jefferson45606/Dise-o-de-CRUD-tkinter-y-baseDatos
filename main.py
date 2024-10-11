@@ -49,6 +49,7 @@ class controlar:
                     eleccion.E = "iniciar"
             elif eleccion.E == "catalogo":
                 inicio.registered_products = b_d.obtener_productos()
+                print(inicio.registered_products)
                 inicio.iniciar()
                 if inicio.confirmar == "si":
                     inicio.registered_products = b_d.obtener_productos()
@@ -60,6 +61,11 @@ class controlar:
                     print(inicio.registered_products)
                     eleccion.E = "catalogo"
                     inicio.confirmar = None
+                elif inicio.confirmar == "actualizar":
+                    guardado.actualizar_productos()
+                    inicio.confirmar = None
+                elif inicio.confirmar == "eliminar":
+                    guardado.eliminar_registro()
             else:
                 break
         

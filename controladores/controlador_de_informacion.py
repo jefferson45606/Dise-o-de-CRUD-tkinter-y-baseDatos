@@ -28,3 +28,9 @@ class guardado:
         
     def cargar_productos():
         b_d.agregar_avena(inicio.codigo, inicio.name, inicio.description, inicio.price, inicio.ventas, inicio.image_path)
+        
+    def actualizar_productos():
+        b_d.actualizar(inicio.codigo, inicio.name, inicio.description, inicio.price, inicio.ventas, inicio.image_path)
+        
+    def eliminar_registro():
+        b_d.eliminar(inicio.codigo)

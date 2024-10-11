@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 import random
+import tkinter
 
 # Ventana 1: Catálogo de Productos
 class ProductsFrame(tk.Frame):
@@ -103,7 +104,7 @@ class ProductsFrame(tk.Frame):
             widget.destroy()
         
         # Mostrar cada producto en la grilla
-        for index, product in enumerate(inicio.registered_products):
+        for index, product, in enumerate(inicio.registered_products):
             
             img = Image.open(product["imagen"])
             img.thumbnail((100, 100))
@@ -115,7 +116,9 @@ class ProductsFrame(tk.Frame):
             img_label = tk.Label(product_frame, image=img)
             img_label.image = img
             img_label.pack()
-
+            
+            tk.Label(product_frame, text=f"codigo de\nproducto", font=("Arial", 10, "bold")).pack(pady=2)
+            tk.Button(product_frame, text=product["ID_producto"], font=("Arial", 10, "bold"), width=10,command=lambda t=product: inicio.decicion(t)).pack(pady=2)
             tk.Label(product_frame, text=product["Nombre"], font=("Arial", 10, "bold")).pack(pady=2)
             tk.Label(product_frame, text=product["Descripcion"], font=("Arial", 8)).pack(pady=2)
             tk.Label(product_frame, text=(f"Precio: ${product['Precio']:.2f}"), font=("Arial", 8)).pack(pady=2)
@@ -253,7 +256,7 @@ class inicio():
         top_menu_frame.pack(side="top", fill="x")
 
         # Botones del menú superior
-        for menu in [("Home", "ProductsFrame"), ("About", "AboutFrame")]:
+        for menu in [("catalogo", "ProductsFrame"), ("informes", "AboutFrame")]:
             tk.Button(top_menu_frame, text=menu[0], command=lambda name=menu[1]: inicio.show_frame(name)).pack(side="left", padx=5, pady=5)
 
         # Crear las ventanas y agregarlas al diccionario de frames
@@ -270,3 +273,92 @@ class inicio():
         except:
             print("este codigo no se ejecuta")
         inicio.root.mainloop()
+                
+    def decicion(t):
+        register_window = tk.Tk()
+        register_window.title("editar producto")
+        register_window.geometry("400x400")
+        
+        product_frame = tk.Frame(register_window, bd=1, relief="solid")
+        product_frame.grid(row=1, column=1, padx=10, pady=10)
+        
+        tk.Label(product_frame, text=f"codigo de\nproducto", font=("Arial", 10, "bold")).pack(pady=2)
+        tk.Label(product_frame, text=t["ID_producto"], font=("Arial", 10, "bold"), width=10).pack(pady=2)
+        tk.Button(product_frame, text="editar", font=("Arial", 10, "bold"), width=10,command=lambda a=t: inicio.editar_producto(a,register_window)).pack(pady=2)
+        tk.Button(product_frame, text="eliminar", font=("Arial", 10, "bold"), width=10,command=lambda a=t: inicio.eliminar(a,register_window)).pack(pady=2)
+        tk.Label(product_frame, text=t["Nombre"], font=("Arial", 10, "bold")).pack(pady=2)
+        tk.Label(product_frame, text=t["Descripcion"], font=("Arial", 8)).pack(pady=2)
+        tk.Label(product_frame, text=(f"Precio: ${t['Precio']:.2f}"), font=("Arial", 8)).pack(pady=2)
+        register_window.mainloop()
+        
+    def eliminar(t,p):
+        messagebox.showinfo("Éxito", "Producto eliminado con éxito.")
+        inicio.codigo = t["ID_producto"]
+        inicio.confirmar = "eliminar"
+        p.destroy()
+        inicio.root.destroy()
+            
+    def editar_producto(t,p):
+        p.destroy()
+        def upload_image():
+            filepath = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
+            if filepath:
+                product_image_path.set(filepath)
+                image_label.config(text=f"Imagen: {filepath.split('/')[-1]}")
+                
+        print(t["ID_producto"])
+        register_window_2 = tk.Toplevel()
+        register_window_2.title("modificar Producto")
+        register_window_2.geometry("400x400")
+
+        # Variables para almacenar los datos del producto
+        product_name = tk.StringVar(value=t["Nombre"])
+        product_description = tk.StringVar(value=t["Descripcion"])
+        product_image_path = tk.StringVar(value=t["imagen"])
+        product_price = tk.IntVar(value=t["Precio"])
+        ventas = tk.IntVar(value=t["Cantidad_Stock"])
+
+        # Campos de entrada
+        tk.Label(register_window_2, text="Nombre del Producto:").pack(pady=5)
+        nom = tkinter.Entry(register_window_2, textvariable=product_name)
+        nom.pack(pady=5)
+
+        tk.Label(register_window_2, text="Descripción del Producto:").pack(pady=5)
+        des = tk.Entry(register_window_2, textvariable=product_description)
+        des.pack(pady=5)
+
+        tk.Label(register_window_2, text="Precio del Producto:").pack(pady=5)
+        pre = tk.Entry(register_window_2, textvariable=product_price)
+        pre.pack(pady=5)
+        
+        tk.Label(register_window_2, text="cantidad de ventas:").pack(pady=5)
+        ven = tk.Entry(register_window_2, textvariable=ventas)
+        ven.pack(pady=5)
+        
+        tk.Button(register_window_2, text="Cargar Imagen", command=upload_image).pack(pady=5)
+        image_label = tk.Label(register_window_2, text="No se ha seleccionado ninguna imagen")
+        image_label.pack(pady=5)
+        product_image_path.set(t["imagen"])
+        image_label.config(text=t["imagen"])
+        
+        def cambios():
+            inicio.name = product_name.get()
+            inicio.description = product_description.get()
+            inicio.price = product_price.get()
+            inicio.image_path = product_image_path.get()
+            inicio.codigo = t["ID_producto"]
+            inicio.ventas = ventas.get()
+
+            if inicio.codigo and inicio.name and inicio.description and inicio.image_path and inicio.price >= 0:
+                inicio.confirmar = "actualizar"
+                messagebox.showinfo("Éxito", "Producto actualizado con éxito.")
+                register_window_2.destroy()
+                inicio.root.destroy()
+                
+            else:
+                messagebox.showwarning("Datos Incompletos", "Por favor complete todos los campos y asegúrese de que el precio no sea negativo.")
+                inicio.confirmar = "no"
+                register_window_2.destroy()
+                inicio.root.destroy()
+
+        tk.Button(register_window_2, text="guardar cambios", command=cambios).pack(pady=10)
