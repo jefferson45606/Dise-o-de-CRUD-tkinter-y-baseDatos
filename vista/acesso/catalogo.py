@@ -229,7 +229,7 @@ class AboutFrame(tk.Frame):
         for product in sorted_products[-5:]:  # Menos vendidos
             self.least_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
             
-        imprimir = {"mas vendidos":sorted_products[5],"menos vendidos":sorted_products[-5]}
+        imprimir = {"mas vendidos":sorted_products[:5],"menos vendidos":sorted_products[-5:]}
         print(imprimir)
         json_data = json.dumps(imprimir, indent=4)
         with open("datos.txt", "w") as archivo:
