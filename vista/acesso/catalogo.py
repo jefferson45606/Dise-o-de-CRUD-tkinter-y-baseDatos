@@ -36,7 +36,7 @@ class ProductsFrame(tk.Frame):
         # Marco del catálogo de productos
         ProductsFrame.products_frame = tk.Frame(self)
         ProductsFrame.products_frame.pack(pady=10, fill="both")
-            
+        
         # Botón para registrar un nuevo producto
         register_button = tk.Button(self, text="Registrar Producto", command=self.open_register_window)
         register_button.pack(pady=1)
@@ -116,21 +116,38 @@ class ProductsFrame(tk.Frame):
         for index, product, in enumerate(inicio.registered_products):
             
             img = Image.open(product["imagen"])
-            img.thumbnail((100, 100))
+            img.thumbnail((50, 50))
             img = ImageTk.PhotoImage(img)
             
             product_frame = tk.Frame(ProductsFrame.products_frame, bd=1, relief="solid")
-            product_frame.grid(row=index // 4, column=index % 4, padx=10, pady=10)
+            product_frame.grid(row=index // 10, column=index % 10, padx=2, pady=2)
             
             img_label = tk.Label(product_frame, image=img)
             img_label.image = img
             img_label.pack()
             
-            tk.Label(product_frame, text=f"codigo de\nproducto", font=("Arial", 10, "bold")).pack(pady=2)
-            tk.Button(product_frame, text=product["ID_producto"], font=("Arial", 10, "bold"), width=10,command=lambda t=product: inicio.decicion(t)).pack(pady=2)
-            tk.Label(product_frame, text=product["Nombre"], font=("Arial", 10, "bold")).pack(pady=2)
-            tk.Label(product_frame, text=product["Descripcion"], font=("Arial", 8)).pack(pady=2)
-            tk.Label(product_frame, text=(f"Precio: ${product['Precio']:.2f}"), font=("Arial", 8)).pack(pady=2)
+            tk.Label(product_frame, text=f"codigo de\nproducto", font=("Arial", 10, "bold")).pack(pady=1)
+            tk.Button(product_frame, text=product["ID_producto"], font=("Arial", 10, "bold"), width=10,command=lambda t=product: inicio.decicion(t)).pack(pady=1)
+            tk.Label(product_frame, text=product["Nombre"], font=("Arial", 10, "bold")).pack(pady=1)
+            tk.Label(product_frame, text=product["Descripcion"], font=("Arial", 8)).pack(pady=1)
+            tk.Label(product_frame, text=(f"Precio: ${product['Precio']:.2f}"), font=("Arial", 8)).pack(pady=1)
+        #logo
+        
+        img = Image.open("C:/Users/USER/OneDrive/Documentos/GitHub/Dise-o-de-CRUD-tkinter-y-baseDatos/vista/acesso/imagen_producto.png")
+        img.thumbnail((200, 200))
+        img = ImageTk.PhotoImage(img)
+
+        # Crea el frame sin borde
+        product_frame = tk.Frame(ProductsFrame.products_frame)
+        product_frame.grid(row=0, column=11, columnspan=12, sticky="ew", padx=2, pady=2)
+
+        # Asegúrate de que el frame ocupe todo el espacio disponible
+        ProductsFrame.products_frame.grid_columnconfigure(11, weight=1)
+
+        # Crea el label de la imagen y ajusta el pack para que quede alineado a la derecha
+        img_label = tk.Label(product_frame, image=img)
+        img_label.image = img
+        img_label.pack(side="right", anchor="e")
 
     # Funciones para ordenar el catálogo
     def sort_by_price_desc(self):

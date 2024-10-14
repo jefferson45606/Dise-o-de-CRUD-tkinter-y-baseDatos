@@ -1,15 +1,79 @@
 {
     "mas vendidos": [
         {
-            "ID_producto": 1,
-            "Nombre": "a",
-            "Descripcion": "a",
-            "Precio": 1,
-            "Cantidad_Stock": 1,
-            "imagen": "C:/Users/USER/Videos/Captures/#ia-para-comandos _ FREDDY SD217 - Discord 16_09_2024 3_42_42 p.\u00a0m..png"
+            "ID_producto": 11,
+            "Nombre": "11",
+            "Descripcion": "11",
+            "Precio": 11,
+            "Cantidad_Stock": 11,
+            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 10,
+            "Nombre": "10",
+            "Descripcion": "10",
+            "Precio": 10,
+            "Cantidad_Stock": 10,
+            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 9,
+            "Nombre": "9",
+            "Descripcion": "9",
+            "Precio": 9,
+            "Cantidad_Stock": 9,
+            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 8,
+            "Nombre": "8",
+            "Descripcion": "8",
+            "Precio": 8,
+            "Cantidad_Stock": 8,
+            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 7,
+            "Nombre": "7",
+            "Descripcion": "7",
+            "Precio": 7,
+            "Cantidad_Stock": 7,
+            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
         }
     ],
     "menos vendidos": [
+        {
+            "ID_producto": 5,
+            "Nombre": "5",
+            "Descripcion": "5",
+            "Precio": 5,
+            "Cantidad_Stock": 5,
+            "imagen": "C:/Users/USER/Videos/Captures/main.py - Dise-o-de-CRUD-tkinter-y-baseDatos - Visual Studio Code 12_09_2024 5_10_39 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 4,
+            "Nombre": "4",
+            "Descripcion": "4",
+            "Precio": 4,
+            "Cantidad_Stock": 4,
+            "imagen": "C:/Users/USER/Videos/Captures/main.py - Dise-o-de-CRUD-tkinter-y-baseDatos - Visual Studio Code 12_09_2024 5_10_39 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 3,
+            "Nombre": "3",
+            "Descripcion": "3",
+            "Precio": 3,
+            "Cantidad_Stock": 3,
+            "imagen": "C:/Users/USER/Videos/Captures/Minecraft 4_09_2024 11_23_35 p.\u00a0m..png"
+        },
+        {
+            "ID_producto": 2,
+            "Nombre": "2",
+            "Descripcion": "2",
+            "Precio": 2,
+            "Cantidad_Stock": 2,
+            "imagen": "C:/Users/USER/Videos/Captures/data_base.py - Dise-o-de-CRUD-tkinter-y-baseDatos - Visual Studio Code 2_10_2024 8_18_26 p.\u00a0m..png"
+        },
         {
             "ID_producto": 1,
             "Nombre": "a",
