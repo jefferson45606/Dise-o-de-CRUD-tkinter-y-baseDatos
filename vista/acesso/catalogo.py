@@ -15,15 +15,15 @@ class ProductsFrame(tk.Frame):
         header_frame = tk.Frame(self)
         header_frame.pack(fill="x", pady=5)
 
-        # Título de la sección (Catálogo de Productos) alineado a la izquierda
+        # Título de la sección (Catálogo de Productos) alineenlo a la izquierda
         catalog_title = tk.Label(header_frame, text="Catálogo de Productos", font=("Arial", 18))
         catalog_title.pack(side="left", padx=200)
 
-        # Título de la empresa alineado a la derecha
-        company_label = tk.Label(header_frame, text="Nombre de la Empresa", font=("Arial", 16, "bold"))
+        # alineen el nombre de la compañia a la derecha
+        company_label = tk.Label(header_frame, text="Oat milk", font=("Arial", 16, "bold"))
         company_label.pack(side="right", padx=10)
 
-        # Botones de categorías
+        # botones de categorias
         category_buttons_frame = tk.Frame(self)
         category_buttons_frame.pack(pady=1)
 

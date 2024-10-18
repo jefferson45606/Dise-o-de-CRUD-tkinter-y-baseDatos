@@ -4,11 +4,11 @@ import tkinter as tk
 class registro():
     def inicio():
         registro.root=tk.Tk()
-        registro.root.title("Avanas.com XD")
+        registro.root.title("Avanas.com")
         registro.root.geometry("600x400")
-        registro.root.configure(bg="#b9f1d6")
+        registro.root.configure(bg="ghost white")
         
-        registro.frame = tk.Frame(registro.root, padx=10, pady=10, bg="#b9f1d6")
+        registro.frame = tk.Frame(registro.root, padx=10, pady=10, bg="ghost white")
         registro.frame.pack()
         registro.usuario_label = tk.Label(registro.frame, text="usuario")
         registro.usuario_label.grid(column=1,row=2)
@@ -17,7 +17,7 @@ class registro():
 
         registro.contraseña_label = tk.Label(registro.frame, text="contraseña")
         registro.contraseña_label.grid(column=1,row=4)
-        registro.contraseña_Entry = tk.Entry(registro.frame)
+        registro.contraseña_Entry = tk.Entry(registro.frame) 
         registro.contraseña_Entry.grid(column=1,row=5)
 
         registro.nombre_label = tk.Label(registro.frame, text="Nombre")
