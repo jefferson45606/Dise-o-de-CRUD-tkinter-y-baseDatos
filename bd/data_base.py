@@ -1,6 +1,5 @@
 import mysql.connector
 from mysql.connector import Error
-from tkinter import messagebox
 class b_d():
     def verificar_usuario(username, password):
         b_d.conectar_db()
@@ -41,7 +40,7 @@ class b_d():
             if b_d.conn:
                 cursor = b_d.conn.cursor()
                 print("antes")                                                                                                                                         
-                cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_Stock, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock,imagen))
+                cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_ventas, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock,imagen))
                 print("despues")
                 b_d.conn.commit()
                 cursor.close()
@@ -74,7 +73,7 @@ class b_d():
     def actualizar(codigo,nombre,descripcion,precio,venta,imagen):
         b_d.conectar_db()
         cursor = b_d.conn.cursor()
-        consulta = "UPDATE producto SET Nombre = %s, Descripcion = %s, Precio = %s, Cantidad_Stock = %s, imagen = %s WHERE ID_producto = %s"
+        consulta = "UPDATE producto SET Nombre = %s, Descripcion = %s, Precio = %s, Cantidad_ventas = %s, imagen = %s WHERE ID_producto = %s"
         cursor.execute(consulta, (nombre, descripcion, precio, venta, imagen, codigo))
         b_d.conn.commit()
         cursor.close()

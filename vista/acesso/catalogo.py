@@ -1,10 +1,7 @@
-
 import json
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
-import random
-import tkinter
 
 # Ventana 1: Catálogo de Productos
 class ProductsFrame(tk.Frame):
@@ -219,14 +216,14 @@ class AboutFrame(tk.Frame):
         most_sold_frame = tk.Frame(reports_frame, bd=1, relief="solid")
         most_sold_frame.grid(row=0, column=0, padx=10, pady=10)
         tk.Label(most_sold_frame, text="Más Vendidos").pack(pady=5)
-        self.most_sold_listbox = tk.Listbox(most_sold_frame)
+        self.most_sold_listbox = tk.Listbox(most_sold_frame, width=80)
         self.most_sold_listbox.pack(pady=5)
 
         # Marco de menos vendidos
         least_sold_frame = tk.Frame(reports_frame, bd=1, relief="solid")
         least_sold_frame.grid(row=0, column=1, padx=10, pady=10)
         tk.Label(least_sold_frame, text="Menos Vendidos").pack(pady=5)
-        self.least_sold_listbox = tk.Listbox(least_sold_frame)
+        self.least_sold_listbox = tk.Listbox(least_sold_frame, width=80)
         self.least_sold_listbox.pack(pady=5)
 
         # Botón para generar el informe
@@ -238,13 +235,13 @@ class AboutFrame(tk.Frame):
         self.most_sold_listbox.delete(0, "end")
         self.least_sold_listbox.delete(0, "end")
         # Ordenar los productos por ventas (aquí las ventas son aleatorias)
-        sorted_products = sorted(inicio.registered_products, key=lambda x: x["Cantidad_Stock"], reverse=True)
+        sorted_products = sorted(inicio.registered_products, key=lambda x: x["Cantidad_ventas"], reverse=True)
 
         for product in sorted_products[:5]:  # Más vendidos
-            self.most_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
+            self.most_sold_listbox.insert("end", f"nombre: {product['Nombre']} - ${product['Precio']:.2f} | ventas: {product['Cantidad_ventas']}")
 
         for product in sorted_products[-5:]:  # Menos vendidos
-            self.least_sold_listbox.insert("end", f"{product['Nombre']} - ${product['Precio']:.2f}")
+            self.least_sold_listbox.insert("end", f"nombre: {product['Nombre']} - ${product['Precio']:.2f} | ventas: {product['Cantidad_ventas']}")
             
         imprimir = {"mas vendidos":sorted_products[:5],"menos vendidos":sorted_products[-5:]}
         print(imprimir)
@@ -347,11 +344,11 @@ class inicio():
         product_description = tk.StringVar(value=t["Descripcion"])
         product_image_path = tk.StringVar(value=t["imagen"])
         product_price = tk.IntVar(value=t["Precio"])
-        ventas = tk.IntVar(value=t["Cantidad_Stock"])
+        ventas = tk.IntVar(value=t["Cantidad_ventas"])
 
         # Campos de entrada
         tk.Label(register_window_2, text="Nombre del Producto:").pack(pady=5)
-        nom = tkinter.Entry(register_window_2, textvariable=product_name)
+        nom = tk.Entry(register_window_2, textvariable=product_name)
         nom.pack(pady=5)
 
         tk.Label(register_window_2, text="Descripción del Producto:").pack(pady=5)
