@@ -1,9 +1,6 @@
-from modelo.comprobacion.modeloUsuario import *
-from vista.mensajes.mensajes_de_alerta import *
-from vista.acesso.catalogo import *
-from bd.data_base import *
-from vista.arranque.VistaInicioSesion import *
-
+from vista.mensajes.mensajes_de_alerta import errores_en_registro,exito_en_registro,inicio_de_sesion_me
+from vista.acesso.catalogo import inicio
+from bd.data_base import b_d
 class guardado:
     def comprobacion_registro(usuario,contraseña,nombre,rol,cedula):
         guardado.resultado=b_d.registrar_usuario_gui(cedula,nombre,contraseña,rol)

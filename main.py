@@ -1,9 +1,8 @@
 from vista.arranque.vista_arranque import eleccion
 from vista.arranque.vista_registro import registro
 from vista.arranque.VistaInicioSesion import vistadeinicio
-from modelo.comprobacion.modeloUsuario import *
-from controladores.controlador_de_informacion import *
-from vista.acesso.catalogo import *
+from controladores.controlador_de_informacion import b_d,guardado
+from vista.acesso.catalogo import  inicio
 
 class controlar:    
     def iniciar():

@@ -1,4 +1,4 @@
-from vista.mensajes.mensajes_de_alerta import *
+from vista.mensajes.mensajes_de_alerta import errores_en_registro
 import tkinter as tk
 
 class registro():

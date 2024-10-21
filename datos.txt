@@ -1,86 +1,54 @@
 {
     "mas vendidos": [
         {
-            "ID_producto": 111,
-            "Nombre": "111",
-            "Descripcion": "111",
-            "Precio": 111,
-            "Cantidad_ventas": 111,
-            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
-        },
-        {
-            "ID_producto": 11,
-            "Nombre": "11",
-            "Descripcion": "11",
-            "Precio": 11,
-            "Cantidad_ventas": 11,
-            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
-        },
-        {
             "ID_producto": 10,
-            "Nombre": "10",
-            "Descripcion": "10",
-            "Precio": 10,
-            "Cantidad_ventas": 10,
-            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+            "Nombre": "agua",
+            "Descripcion": "brisa",
+            "Precio": 200000,
+            "Cantidad_ventas": 1000,
+            "imagen": "D:/Pictures/imagen producto.png"
         },
         {
-            "ID_producto": 9,
-            "Nombre": "9",
-            "Descripcion": "9",
-            "Precio": 9,
-            "Cantidad_ventas": 9,
-            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+            "ID_producto": 7,
+            "Nombre": "pipas",
+            "Descripcion": "jajajaa",
+            "Precio": 2000,
+            "Cantidad_ventas": 50,
+            "imagen": "D:/Pictures/imagen producto.png"
         },
         {
-            "ID_producto": 8,
-            "Nombre": "8",
-            "Descripcion": "8",
-            "Precio": 8,
-            "Cantidad_ventas": 8,
-            "imagen": "C:/Users/USER/Videos/Captures/Cat\u00e1logo de Productos 14_10_2024 3_56_14 p.\u00a0m..png"
+            "ID_producto": 6,
+            "Nombre": "avena china",
+            "Descripcion": "avena hecha a base de almidon de yuca",
+            "Precio": 20000,
+            "Cantidad_ventas": 20,
+            "imagen": "D:/Pictures/imagen producto.png"
         }
     ],
     "menos vendidos": [
         {
-            "ID_producto": 5,
-            "Nombre": "5",
-            "Descripcion": "5",
-            "Precio": 5,
-            "Cantidad_ventas": 5,
-            "imagen": "C:/Users/USER/Videos/Captures/main.py - Dise-o-de-CRUD-tkinter-y-baseDatos - Visual Studio Code 12_09_2024 5_10_39 p.\u00a0m..png"
+            "ID_producto": 6,
+            "Nombre": "avena china",
+            "Descripcion": "avena hecha a base de almidon de yuca",
+            "Precio": 20000,
+            "Cantidad_ventas": 20,
+            "imagen": "D:/Pictures/imagen producto.png"
         },
         {
-            "ID_producto": 4,
-            "Nombre": "4",
-            "Descripcion": "4",
-            "Precio": 4,
-            "Cantidad_ventas": 4,
-            "imagen": "C:/Users/USER/Videos/Captures/main.py - Dise-o-de-CRUD-tkinter-y-baseDatos - Visual Studio Code 12_09_2024 5_10_39 p.\u00a0m..png"
+            "ID_producto": 7,
+            "Nombre": "pipas",
+            "Descripcion": "jajajaa",
+            "Precio": 2000,
+            "Cantidad_ventas": 50,
+            "imagen": "D:/Pictures/imagen producto.png"
         },
         {
-            "ID_producto": 3,
-            "Nombre": "3",
-            "Descripcion": "3",
-            "Precio": 3,
-            "Cantidad_ventas": 3,
-            "imagen": "C:/Users/USER/Videos/Captures/Minecraft 4_09_2024 11_23_35 p.\u00a0m..png"
-        },
-        {
-            "ID_producto": 2,
-            "Nombre": "2",
-            "Descripcion": "2",
-            "Precio": 2,
-            "Cantidad_ventas": 2,
-            "imagen": "C:/Users/USER/Videos/Captures/data_base.py - Dise-o-de-CRUD-tkinter-y-baseDatos - Visual Studio Code 2_10_2024 8_18_26 p.\u00a0m..png"
-        },
-        {
-            "ID_producto": 1,
-            "Nombre": "a",
-            "Descripcion": "a",
-            "Precio": 1,
-            "Cantidad_ventas": 1,
-            "imagen": "C:/Users/USER/Videos/Captures/#ia-para-comandos _ FREDDY SD217 - Discord 16_09_2024 3_42_42 p.\u00a0m..png"
+            "ID_producto": 10,
+            "Nombre": "agua",
+            "Descripcion": "brisa",
+            "Precio": 200000,
+            "Cantidad_ventas": 1000,
+            "imagen": "D:/Pictures/imagen producto.png"
         }
     ]
 }

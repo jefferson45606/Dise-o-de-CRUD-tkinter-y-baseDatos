@@ -130,7 +130,7 @@ class ProductsFrame(tk.Frame):
             tk.Label(product_frame, text=(f"Precio: ${product['Precio']:.2f}"), font=("Arial", 8)).pack(pady=1)
         #logo
         
-        img = Image.open("C:/Users/USER/OneDrive/Documentos/GitHub/Dise-o-de-CRUD-tkinter-y-baseDatos/vista/acesso/imagen_producto.png")
+        img = Image.open("vista/acesso/imagen_producto.png")
         img.thumbnail((200, 200))
         img = ImageTk.PhotoImage(img)
 
@@ -240,10 +240,13 @@ class AboutFrame(tk.Frame):
         for product in sorted_products[:5]:  # Más vendidos
             self.most_sold_listbox.insert("end", f"nombre: {product['Nombre']} - ${product['Precio']:.2f} | ventas: {product['Cantidad_ventas']}")
 
-        for product in sorted_products[-5:]:  # Menos vendidos
+        for product in reversed(sorted_products[-5:]):  # Menos vendidos
             self.least_sold_listbox.insert("end", f"nombre: {product['Nombre']} - ${product['Precio']:.2f} | ventas: {product['Cantidad_ventas']}")
             
-        imprimir = {"mas vendidos":sorted_products[:5],"menos vendidos":sorted_products[-5:]}
+        imprimir = {
+            "mas vendidos": sorted_products[:5],
+            "menos vendidos": list(reversed(sorted_products[-5:]))  # Convertir a lista
+        }
         print(imprimir)
         json_data = json.dumps(imprimir, indent=4)
         with open("datos.txt", "w") as archivo:
