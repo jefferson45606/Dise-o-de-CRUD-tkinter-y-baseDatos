@@ -1,0 +1,54 @@
+{
+    "mas vendidos": [
+        {
+            "ID_producto": 10,
+            "Nombre": "agua",
+            "Descripcion": "brisa",
+            "Precio": 200000,
+            "Cantidad_ventas": 1000,
+            "imagen": "D:/Pictures/imagen producto.png"
+        },
+        {
+            "ID_producto": 7,
+            "Nombre": "pipas",
+            "Descripcion": "jajajaa",
+            "Precio": 2000,
+            "Cantidad_ventas": 50,
+            "imagen": "D:/Pictures/imagen producto.png"
+        },
+        {
+            "ID_producto": 6,
+            "Nombre": "avena china",
+            "Descripcion": "avena hecha a base de almidon de yuca",
+            "Precio": 20000,
+            "Cantidad_ventas": 20,
+            "imagen": "D:/Pictures/imagen producto.png"
+        }
+    ],
+    "menos vendidos": [
+        {
+            "ID_producto": 6,
+            "Nombre": "avena china",
+            "Descripcion": "avena hecha a base de almidon de yuca",
+            "Precio": 20000,
+            "Cantidad_ventas": 20,
+            "imagen": "D:/Pictures/imagen producto.png"
+        },
+        {
+            "ID_producto": 7,
+            "Nombre": "pipas",
+            "Descripcion": "jajajaa",
+            "Precio": 2000,
+            "Cantidad_ventas": 50,
+            "imagen": "D:/Pictures/imagen producto.png"
+        },
+        {
+            "ID_producto": 10,
+            "Nombre": "agua",
+            "Descripcion": "brisa",
+            "Precio": 200000,
+            "Cantidad_ventas": 1000,
+            "imagen": "D:/Pictures/imagen producto.png"
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+import mysql.connector
+from mysql.connector import Error
+class b_d():
+    def verificar_usuario(username, password):
+        b_d.conectar_db()
+        if b_d.conn:
+            cursor = b_d.conn.cursor()
+            cursor.execute('SELECT * FROM usuario WHERE ID_usuario = %s AND Contraseña = %s', (username, password))
+            user = cursor.fetchone()
+            cursor.close()
+            b_d.conn.close()
+            return user is not None
+        return False
+
+    def agregar_usuario(cedula, username, password, rol):
+        b_d.cursor.execute('INSERT INTO usuario (ID_usuario, Usuario, Contraseña, Rol) VALUES (%s, %s, %s, %s)', (cedula, username, password, rol))
+        
+    def registrar_usuario_gui(cedula,username,password,rol):
+        if cedula and username and password and rol:
+            b_d.conectar_db()
+            if b_d.conn:
+                b_d.cursor = b_d.conn.cursor()
+                try:
+                    b_d.agregar_usuario(cedula, username, password, rol)
+                    b_d.conn.commit()
+                    return "usuario registrado"
+                except mysql.connector.Error as e:
+                    return "ya registrado"
+                finally:
+                    b_d.cursor.close()
+                    b_d.conn.close()
+        else:
+            return "llena campos"
+
+    #----------------------avenas-------------------------------------------
+    def agregar_avena(codigo, nombre, descripcion, precio, stock, imagen):
+        print(codigo, nombre, descripcion, precio, stock, imagen)
+        if codigo and nombre and descripcion and precio and stock:
+            b_d.conectar_db()
+            if b_d.conn:
+                cursor = b_d.conn.cursor()
+                print("antes")                                                                                                                                         
+                cursor.execute('INSERT INTO producto (ID_producto, Nombre, Descripcion, Precio, Cantidad_ventas, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (codigo, nombre, descripcion, precio, stock,imagen))
+                print("despues")
+                b_d.conn.commit()
+                cursor.close()
+                b_d.conn.close()
+    #------------------conectar al server------------------------------------------------
+            
+    def obtener_productos():
+        b_d.conectar_db()
+        cursor = b_d.conn.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM producto')
+        productos=cursor.fetchall()
+        cursor.close()
+        b_d.conn.close()
+        return productos
+            
+    def conectar_db():
+        print("conectando")
+        try:
+            b_d.conn = mysql.connector.connect(
+                host='localhost',
+                user='anderson',       
+                password='12345', 
+                database='catalogo_avenas'          
+            )
+            if b_d.conn.is_connected():
+                print("Conexión exitosa a la base de datos 'catalogo_avenas'")
+        except Error as e:
+            print(f"Error al conectar a la base de datos: {e}")
+            
+    def actualizar(codigo,nombre,descripcion,precio,venta,imagen):
+        b_d.conectar_db()
+        cursor = b_d.conn.cursor()
+        consulta = "UPDATE producto SET Nombre = %s, Descripcion = %s, Precio = %s, Cantidad_ventas = %s, imagen = %s WHERE ID_producto = %s"
+        cursor.execute(consulta, (nombre, descripcion, precio, venta, imagen, codigo))
+        b_d.conn.commit()
+        cursor.close()
+        b_d.conn.close()
+        
+    def eliminar(codigo):
+        b_d.conectar_db()
+        cursor = b_d.conn.cursor()
+        consulta = "DELETE FROM producto WHERE ID_producto = %s"
+        cursor.execute(consulta, (codigo,))
+        b_d.conn.commit()
+        cursor.close()
+        b_d.conn.close()
